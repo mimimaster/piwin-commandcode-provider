@@ -1,6 +1,6 @@
 {
   "name": "piwin-commandcode-provider",
-  "version": "0.7.1-piwin.1",
+  "version": "0.7.1-piwin.2",
   "description": "Command Code provider adapted for piwin Host OAuth and model management",
   "type": "module",
   "license": "MIT",

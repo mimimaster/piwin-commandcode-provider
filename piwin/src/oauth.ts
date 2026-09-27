@@ -196,18 +196,18 @@ async function browserLogin(callbacks: OAuthLoginCallbacks): Promise<OAuthCreden
 /**
  * Starts the login flow for Command Code.
  *
+ * In piwin, connecting via OAuth triggers browser login directly. If an API key
+ * is pre-configured via COMMAND_CODE_API_KEY, that key is validated and used.
+ * If browser callback fails or times out, it falls back to prompting for the key.
+ *
  * Returns OAuth credentials where access == refresh == the user's API key.
  * The keys don't expire, so we set a far-future expiry.
  */
 export async function login(callbacks: OAuthLoginCallbacks): Promise<OAuthCredentials> {
-  const choice = await chooseLoginFlow(callbacks)
-
-  if (choice.type === "apiKey") {
-    await validateApiKey(choice.apiKey)
-    return credentialsFromApiKey(choice.apiKey)
-  }
-  if (choice.type === "prompt") {
-    return promptForApiKey(callbacks, "Paste your Command Code API key:")
+  const envKey = process.env.COMMAND_CODE_API_KEY?.trim()
+  if (envKey) {
+    await validateApiKey(envKey)
+    return credentialsFromApiKey(envKey)
   }
 
   return browserLogin(callbacks)
