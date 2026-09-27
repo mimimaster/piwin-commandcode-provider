@@ -1,0 +1,12 @@
+{
+  "name": "piwin-commandcode-provider",
+  "version": "0.7.1-piwin.1",
+  "description": "Command Code provider adapted for piwin Host OAuth and model management",
+  "type": "module",
+  "license": "MIT",
+  "pi": { "extensions": ["./index.ts"] },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}
